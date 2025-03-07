@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surpresa para Você</title>
+    <style>
+        body {
+            background-color: pink;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        h1 {
+            color: red;
+        }
+        #poema {
+            font-size: 1.5em;
+            color: purple;
+            margin-top: 20px;
+        }
+        .coração {
+            font-size: 80px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="coração">❤️</div>
+    <h1>Para Minha Querida...</h1>
+    <div id="poema">"Você é a luz dos meus dias e a paz das minhas noites..."</div>
+    <audio controls autoplay loop>
+        <source src="sua-musica-favorita.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+    </audio>
+</body>
+</html>
