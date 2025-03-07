@@ -6,32 +6,85 @@
     <title>Surpresa para Você</title>
     <style>
         body {
-            background-color: pink;
+            margin: 0;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle, #000, #1b003b, #320076, #4e0099);
+            font-family: Arial, sans-serif;
         }
         h1 {
-            color: red;
+            color: white;
+            margin: 20px 0;
         }
         #poema {
             font-size: 1.5em;
-            color: purple;
+            color: lightgray;
+            text-align: center;
             margin-top: 20px;
         }
-        .coração {
-            font-size: 80px;
-            color: red;
+        .coracao {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            clip-path: polygon(50% 0%, 100% 38%, 81% 95%, 50% 100%, 19% 95%, 0% 38%);
+            animation: pulsar 1.5s infinite;
+        }
+        .fragmentos {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: transparent;
+        }
+        .fragmento {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 20, 147, 0.8);
+            border-radius: 50%;
+            animation: flutuar 3s infinite ease-in-out;
+        }
+        .fragmento:nth-child(1) { top: 10%; left: 15%; animation-delay: 0.2s; }
+        .fragmento:nth-child(2) { top: 25%; left: 80%; animation-delay: 0.4s; }
+        .fragmento:nth-child(3) { top: 75%; left: 50%; animation-delay: 0.6s; }
+        .fragmento:nth-child(4) { top: 60%; left: 10%; animation-delay: 0.8s; }
+        .fragmento:nth-child(5) { top: 20%; left: 50%; animation-delay: 1s; }
+        @keyframes pulsar {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 25px rgba(255, 20, 147, 0.8);
+            }
+        }
+        @keyframes flutuar {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(50px, -50px) rotate(360deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="coração">❤️</div>
-    <h1>Para Minha Querida...</h1>
+    <div class="coracao">
+        <div class="fragmentos">
+            <div class="fragmento"></div>
+            <div class="fragmento"></div>
+            <div class="fragmento"></div>
+            <div class="fragmento"></div>
+            <div class="fragmento"></div>
+        </div>
+    </div>
+    <h1>Para a Mulher da Minha Vida...</h1>
     <div id="poema">"Você é a luz dos meus dias e a paz das minhas noites..."</div>
     <audio controls autoplay loop>
         <source src="sua-musica-favorita.mp3" type="audio/mpeg">
@@ -39,3 +92,4 @@
     </audio>
 </body>
 </html>
+
