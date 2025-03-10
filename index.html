@@ -1,95 +1,126 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surpresa para Você</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(circle, #000, #1b003b, #320076, #4e0099);
-            font-family: Arial, sans-serif;
-        }
-        h1 {
-            color: white;
-            margin: 20px 0;
-        }
-        #poema {
-            font-size: 1.5em;
-            color: lightgray;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .coracao {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, #ff69b4, #ff1493);
-            clip-path: polygon(50% 0%, 100% 38%, 81% 95%, 50% 100%, 19% 95%, 0% 38%);
-            animation: pulsar 1.5s infinite;
-        }
-        .fragmentos {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: transparent;
-        }
-        .fragmento {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 20, 147, 0.8);
-            border-radius: 50%;
-            animation: flutuar 3s infinite ease-in-out;
-        }
-        .fragmento:nth-child(1) { top: 10%; left: 15%; animation-delay: 0.2s; }
-        .fragmento:nth-child(2) { top: 25%; left: 80%; animation-delay: 0.4s; }
-        .fragmento:nth-child(3) { top: 75%; left: 50%; animation-delay: 0.6s; }
-        .fragmento:nth-child(4) { top: 60%; left: 10%; animation-delay: 0.8s; }
-        .fragmento:nth-child(5) { top: 20%; left: 50%; animation-delay: 1s; }
-        @keyframes pulsar {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
-            }
-            50% {
-                transform: scale(1.1);
-                box-shadow: 0 0 25px rgba(255, 20, 147, 0.8);
-            }
-        }
-        @keyframes flutuar {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(50px, -50px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surpresa para Você</title>
+  <style>
+    /* Estilo da página com fundo galáxia */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle, #000, #1b003b, #320076, #4e0099);
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+    /* Coração formado por uma forma com clip-path e pulsando em sincronia (simula o batimento) */
+    .coracao {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(135deg, #ff69b4, #ff1493);
+      clip-path: polygon(50% 0%, 100% 38%, 81% 95%, 50% 100%, 19% 95%, 0% 38%);
+      animation: pulsar 1s infinite;
+      margin-bottom: 20px;
+    }
+    /* Animação de pulsação para o coração */
+    @keyframes pulsar {
+      0% { transform: scale(1); box-shadow: 0 0 10px rgba(255,20,147,0.5); }
+      50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(255,20,147,1); }
+      100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,20,147,0.5); }
+    }
+    /* Camada dos fragmentos que compõe o coração */
+    .fragmentos {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 200px;
+      pointer-events: none;
+    }
+    /* Fragmentos animados que simulam formar o coração a cada batida */
+    .fragmento {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: rgba(255,20,147,0.9);
+      border-radius: 50%;
+      animation: assemble 1s infinite ease-in-out;
+    }
+    /* Posicionamento e pequenos delays para os fragmentos */
+    .fragmento:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
+    .fragmento:nth-child(2) { top: 25%; left: 80%; animation-delay: 0.1s; }
+    .fragmento:nth-child(3) { top: 75%; left: 50%; animation-delay: 0.2s; }
+    .fragmento:nth-child(4) { top: 60%; left: 10%; animation-delay: 0.3s; }
+    .fragmento:nth-child(5) { top: 20%; left: 50%; animation-delay: 0.4s; }
+    
+    /* Animação para os fragmentos: eles pulsarão e se "reunirão" no coração */
+    @keyframes assemble {
+      0% { transform: scale(0.8); opacity: 0.7; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(0.8); opacity: 0.7; }
+    }
+    /* Estilo e animação para o poema: fade in e out */
+    #poema {
+      font-size: 1.5em;
+      text-align: center;
+      max-width: 80%;
+      opacity: 0;
+      animation: fadeinout 5s infinite;
+    }
+    @keyframes fadeinout {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    /* Espaçamento para o player de áudio */
+    audio {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-    <div class="coracao">
-        <div class="fragmentos">
-            <div class="fragmento"></div>
-            <div class="fragmento"></div>
-            <div class="fragmento"></div>
-            <div class="fragmento"></div>
-            <div class="fragmento"></div>
-        </div>
+  <!-- Coração com seus fragmentos animados -->
+  <div class="coracao">
+    <div class="fragmentos">
+      <div class="fragmento"></div>
+      <div class="fragmento"></div>
+      <div class="fragmento"></div>
+      <div class="fragmento"></div>
+      <div class="fragmento"></div>
     </div>
-    <h1>Para a Mulher da Minha Vida...</h1>
-    <div id="poema">"Você é a luz dos meus dias e a paz das minhas noites..."</div>
-    <audio controls autoplay loop>
-        <source src="sua-musica-favorita.mp3" type="audio/mpeg">
-        Seu navegador não suporta áudio.
-    </audio>
+  </div>
+  <!-- Área onde o poema aparecerá -->
+  <div id="poema"></div>
+  <!-- Player de áudio (substitua "minha-musica.mp3" pelo nome do seu arquivo) -->
+  <audio id="audio" controls autoplay loop>
+    <source src="deixafluir.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+  <script>
+    // Array com as linhas do poema
+    const linhas = [
+      "Você é a luz dos meus dias,",
+      "A brisa suave na calmaria,",
+      "O amor que preenche meu ser,",
+      "Minha eterna melodia de viver."
+    ];
+    let indice = 0;
+    const poemaElement = document.getElementById("poema");
+
+    // Função para atualizar a linha do poema
+    function atualizarPoema() {
+      poemaElement.textContent = linhas[indice];
+      indice = (indice + 1) % linhas.length;
+    }
+    // Exibe a primeira linha imediatamente e troca a cada 5 segundos
+    atualizarPoema();
+    setInterval(atualizarPoema, 5000);
+  </script>
 </body>
 </html>
-
