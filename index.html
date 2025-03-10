@@ -57,7 +57,6 @@
     .fragmento:nth-child(3) { top: 75%; left: 50%; animation-delay: 0.2s; }
     .fragmento:nth-child(4) { top: 60%; left: 10%; animation-delay: 0.3s; }
     .fragmento:nth-child(5) { top: 20%; left: 50%; animation-delay: 0.4s; }
-    
     /* Animação para os fragmentos: eles pulsarão e se "reunirão" no coração */
     @keyframes assemble {
       0% { transform: scale(0.8); opacity: 0.7; }
@@ -97,8 +96,8 @@
   </div>
   <!-- Área onde o poema aparecerá -->
   <div id="poema"></div>
-  <!-- Player de áudio (substitua "minha-musica.mp3" pelo nome do seu arquivo) -->
-  <audio id="audio" controls autoplay loop>
+  <!-- Player de áudio utilizando o arquivo de música correto -->
+  <audio controls autoplay loop>
     <source src="deixafluir.mp3" type="audio/mpeg">
     Seu navegador não suporta áudio.
   </audio>
