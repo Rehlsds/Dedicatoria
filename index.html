@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Surpresa para Você</title>
   <style>
-    /* Estilo da página com fundo galáxia */
+    /* Estilo geral da página */
     body {
       margin: 0;
       height: 100vh;
@@ -17,90 +17,74 @@
       font-family: Arial, sans-serif;
       color: white;
     }
-    /* Coração formado por uma forma com clip-path e pulsando em sincronia (simula o batimento) */
-    .coracao {
-      position: relative;
-      width: 200px;
-      height: 200px;
-      background: linear-gradient(135deg, #ff69b4, #ff1493);
-      clip-path: polygon(50% 0%, 100% 38%, 81% 95%, 50% 100%, 19% 95%, 0% 38%);
-      animation: pulsar 1s infinite;
-      margin-bottom: 20px;
+    h1 {
+      margin: 20px 0;
     }
-    /* Animação de pulsação para o coração */
-    @keyframes pulsar {
-      0% { transform: scale(1); box-shadow: 0 0 10px rgba(255,20,147,0.5); }
-      50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(255,20,147,1); }
-      100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,20,147,0.5); }
-    }
-    /* Camada dos fragmentos que compõe o coração */
-    .fragmentos {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 200px;
-      height: 200px;
-      pointer-events: none;
-    }
-    /* Fragmentos animados que simulam formar o coração a cada batida */
-    .fragmento {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: rgba(255,20,147,0.9);
-      border-radius: 50%;
-      animation: assemble 1s infinite ease-in-out;
-    }
-    /* Posicionamento e pequenos delays para os fragmentos */
-    .fragmento:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
-    .fragmento:nth-child(2) { top: 25%; left: 80%; animation-delay: 0.1s; }
-    .fragmento:nth-child(3) { top: 75%; left: 50%; animation-delay: 0.2s; }
-    .fragmento:nth-child(4) { top: 60%; left: 10%; animation-delay: 0.3s; }
-    .fragmento:nth-child(5) { top: 20%; left: 50%; animation-delay: 0.4s; }
-    /* Animação para os fragmentos: eles pulsarão e se "reunirão" no coração */
-    @keyframes assemble {
-      0% { transform: scale(0.8); opacity: 0.7; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(0.8); opacity: 0.7; }
-    }
-    /* Estilo e animação para o poema: fade in e out */
+    /* Efeito para o poema */
     #poema {
       font-size: 1.5em;
       text-align: center;
       max-width: 80%;
       opacity: 0;
-      animation: fadeinout 5s infinite;
+      animation: fadeinout 6s infinite;
     }
     @keyframes fadeinout {
-      0% { opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { opacity: 0; }
+      0%, 100% { opacity: 0; }
+      20%, 80% { opacity: 1; }
     }
-    /* Espaçamento para o player de áudio */
+    /* Forma animada que irá morphar de pentágono para coração */
+    .animated-shape {
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(135deg, #ff69b4, #ff1493);
+      margin-bottom: 20px;
+      animation: morphShape 4s infinite;
+    }
+    @keyframes morphShape {
+      0%, 100% {
+        /* Pentágono (usando 6 pontos; o primeiro ponto é repetido para fechar a forma) */
+        clip-path: polygon(
+          50% 0%,    /* topo central */
+          100% 38%,  /* lado direito superior */
+          80% 100%,  /* direito inferior */
+          20% 100%,  /* esquerdo inferior */
+          0% 38%,    /* lado esquerdo superior */
+          50% 0%     /* repete o topo central */
+        );
+      }
+      50% {
+        /* Coração com 6 pontos */
+        clip-path: polygon(
+          50% 0%,    /* topo central */
+          100% 38%,  /* direito superior */
+          81% 95%,   /* curva direita */
+          50% 100%,  /* ponta inferior */
+          19% 95%,   /* curva esquerda */
+          0% 38%     /* esquerdo superior */
+        );
+      }
+    }
+    /* Estilo para o player de áudio */
     audio {
       margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <!-- Coração com seus fragmentos animados -->
-  <div class="coracao">
-    <div class="fragmentos">
-      <div class="fragmento"></div>
-      <div class="fragmento"></div>
-      <div class="fragmento"></div>
-      <div class="fragmento"></div>
-      <div class="fragmento"></div>
-    </div>
-  </div>
-  <!-- Área onde o poema aparecerá -->
+  <!-- Forma que irá morphar -->
+  <div class="animated-shape"></div>
+  
+  <h1>Para a Mulher da Minha Vida...</h1>
+  
+  <!-- Poema animado -->
   <div id="poema"></div>
-  <!-- Player de áudio utilizando o arquivo de música correto -->
-  <audio controls autoplay loop>
+  
+  <!-- Player de áudio (certifique-se que o arquivo "deixafluir.mp3" está na raiz do repositório) -->
+  <audio id="audio" controls autoplay loop>
     <source src="deixafluir.mp3" type="audio/mpeg">
     Seu navegador não suporta áudio.
   </audio>
+  
   <script>
     // Array com as linhas do poema
     const linhas = [
@@ -112,14 +96,13 @@
     let indice = 0;
     const poemaElement = document.getElementById("poema");
 
-    // Função para atualizar a linha do poema
     function atualizarPoema() {
       poemaElement.textContent = linhas[indice];
       indice = (indice + 1) % linhas.length;
     }
-    // Exibe a primeira linha imediatamente e troca a cada 5 segundos
+    // Exibe a primeira linha e atualiza a cada 6 segundos
     atualizarPoema();
-    setInterval(atualizarPoema, 5000);
+    setInterval(atualizarPoema, 6000);
   </script>
 </body>
 </html>
