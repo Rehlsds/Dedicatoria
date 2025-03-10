@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Surpresa para Você</title>
   <style>
     /* Estilo geral da página */
@@ -20,7 +20,7 @@
     h1 {
       margin: 20px 0;
     }
-    /* Efeito para o poema */
+    /* Animação do poema */
     #poema {
       font-size: 1.5em;
       text-align: center;
@@ -32,7 +32,7 @@
       0%, 100% { opacity: 0; }
       20%, 80% { opacity: 1; }
     }
-    /* Forma animada que irá morphar de pentágono para coração */
+    /* Forma que morpha (inicialmente em forma de polígono simples) */
     .animated-shape {
       width: 200px;
       height: 200px;
@@ -42,46 +42,46 @@
     }
     @keyframes morphShape {
       0%, 100% {
-        /* Pentágono (usando 6 pontos; o primeiro ponto é repetido para fechar a forma) */
+        /* Forma inicial: um polígono simples com 6 vértices */
         clip-path: polygon(
           50% 0%,    /* topo central */
           100% 38%,  /* lado direito superior */
-          80% 100%,  /* direito inferior */
-          20% 100%,  /* esquerdo inferior */
+          80% 100%,  /* inferior direito */
+          20% 100%,  /* inferior esquerdo */
           0% 38%,    /* lado esquerdo superior */
-          50% 0%     /* repete o topo central */
+          50% 0%     /* fecha a forma */
         );
       }
       50% {
-        /* Coração com 6 pontos */
+        /* Forma intermediária: tentativa de coração com 6 vértices */
         clip-path: polygon(
-          50% 0%,    /* topo central */
-          100% 38%,  /* direito superior */
-          81% 95%,   /* curva direita */
+          50% 15%,   /* topo central, deslocado para baixo */
+          84% 15%,   /* topo direito */
+          100% 40%,  /* lado direito */
           50% 100%,  /* ponta inferior */
-          19% 95%,   /* curva esquerda */
-          0% 38%     /* esquerdo superior */
+          0% 40%,    /* lado esquerdo */
+          16% 15%    /* topo esquerdo */
         );
       }
     }
-    /* Estilo para o player de áudio */
+    /* Espaço para o player de áudio */
     audio {
       margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <!-- Forma que irá morphar -->
+  <!-- Elemento que morpha de forma (de polígono para coração) -->
   <div class="animated-shape"></div>
   
   <h1>Para a Mulher da Minha Vida...</h1>
   
-  <!-- Poema animado -->
+  <!-- Poema dinâmico -->
   <div id="poema"></div>
   
-  <!-- Player de áudio (certifique-se que o arquivo "deixafluir.mp3" está na raiz do repositório) -->
-  <audio id="audio" controls autoplay loop>
-    <source src="deixafluir.mp3" type="audio/mpeg">
+  <!-- Player de áudio: certifique-se de que o arquivo “deixafluir.mp3” esteja na raiz -->
+  <audio controls autoplay loop>
+    <source src="deixafluir.mp3" type="audio/mpeg" />
     Seu navegador não suporta áudio.
   </audio>
   
