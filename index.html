@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bailarina Dançando</title>
   <style>
-    /* Fundo estilo galáxia em rosa/roxo escuro */
+    /* Fundo estilo galáxia */
     body {
       margin: 0;
       height: 100vh;
@@ -18,7 +18,7 @@
       width: 200px;
       height: 200px;
     }
-    /* Animação geral do corpo (leve balanço para simular dança) */
+    /* Animação geral da bailarina (leve balanço) */
     .dancer {
       animation: bob 2s infinite ease-in-out;
     }
@@ -29,8 +29,7 @@
     /* Animação dos braços */
     .arm {
       transform-box: fill-box;
-      /* Define o centro de rotação para os braços – o “ombro” */
-      transform-origin: 100px 50px;
+      transform-origin: 100px 50px; /* ponto de referência para rotação no "ombro" */
       animation: armDance 1s infinite alternate ease-in-out;
     }
     .arm.right {
@@ -41,11 +40,10 @@
       50% { transform: rotate(15deg); }
       100% { transform: rotate(-15deg); }
     }
-    /* Animação dos pés/ pernas */
+    /* Animação das pernas */
     .leg {
       transform-box: fill-box;
-      /* Definindo a âncora de rotação no quadril */
-      transform-origin: 100px 80px;
+      transform-origin: 100px 80px; /* ponto de referência para rotação no "quadril" */
       animation: legDance 1s infinite alternate ease-in-out;
     }
     .leg.right {
@@ -60,13 +58,13 @@
 </head>
 <body>
   <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <!-- Grupo inteiro da bailarina -->
+    <!-- Grupo principal da bailarina -->
     <g class="dancer">
       <!-- Cabeça -->
       <circle cx="100" cy="30" r="10" fill="#ff69b4" />
-      <!-- Corpo (linha com stroke grosso) -->
+      <!-- Corpo -->
       <line x1="100" y1="40" x2="100" y2="80" stroke="#ff69b4" stroke-width="6" stroke-linecap="round" />
-      <!-- Saia/tutu (um polígono simples) -->
+      <!-- Tutu / Saia -->
       <polygon points="80,80 100,100 120,80" fill="#ff69b4" />
       <!-- Braço esquerdo -->
       <g class="arm left">
