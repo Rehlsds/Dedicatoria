@@ -20,27 +20,40 @@
     
     /* Animação do coração pulsante */
     .heart {
-      width: 80px;
-      height: 80px;
+      width: 72px;
+      height: 72px;
       background-color: #ff1493;
       position: relative;
       transform: rotate(-45deg);
     }
     .heart::before, .heart::after {
       content: "";
-      width: 80px;
-      height: 80px;
+      width: 72px;
+      height: 72px;
       background-color: #ff1493;
       border-radius: 50%;
       position: absolute;
     }
     .heart::before {
-      top: -40px;
+      top: -36px;
       left: 0;
     }
     .heart::after {
-      left: 40px;
+      left: 36px;
       top: 0;
+    }
+    
+    /* Animação da bailarina */
+    .dancer {
+      width: 100px;
+      height: 100px;
+      background: url('bailarina.png') no-repeat center/contain;
+      animation: dance 2s infinite alternate ease-in-out;
+    }
+    
+    @keyframes dance {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
     }
     
     /* Estilo do poema */
@@ -67,6 +80,9 @@
   <!-- Coração animado -->
   <div class="heart" id="heart"></div>
   
+  <!-- Bailarina dançando -->
+  <div class="dancer"></div>
+  
   <!-- Título ou mensagem -->
   <h1>Para a Mulher da Minha Vida...</h1>
   
@@ -80,12 +96,12 @@
   </audio>
   
   <script>
-    // Array com as linhas do poema
+    // Poema de amor
     const linhas = [
-      "Você é a luz dos meus dias,",
-      "A brisa suave na calmaria,",
-      "O amor que preenche meu ser,",
-      "Minha eterna melodia de viver."
+      "Nos teus olhos vejo um universo sem fim,",
+      "Teu sorriso ilumina até a noite mais escura,",
+      "Em teus braços encontro meu lar,",
+      "Te amo além das palavras, além do tempo."
     ];
     
     let indice = 0;
