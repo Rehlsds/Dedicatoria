@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Batidas do Coração</title>
+  <title>Para o meu grande AMOR</title>
   <style>
     body {
       margin: 0;
@@ -26,26 +26,26 @@
       height: 100%;
       top: 0;
       left: 0;
-      pointer-events: none;
+      overflow: hidden;
     }
     
     .star {
       position: absolute;
+      background-color: white;
       width: 2px;
       height: 2px;
-      background: white;
       opacity: 0.8;
-      animation: twinkle 3s infinite alternate;
+      animation: twinkle 2s infinite alternate;
     }
     
     @keyframes twinkle {
-      0% { opacity: 0.5; }
+      0% { opacity: 0.3; }
       100% { opacity: 1; }
     }
     
     .heart {
-      width: 64px;
-      height: 64px;
+      width: 100px;
+      height: 100px;
       background-color: #ff1493;
       position: relative;
       transform: rotate(-45deg);
@@ -53,18 +53,18 @@
     }
     .heart::before, .heart::after {
       content: "";
-      width: 64px;
-      height: 64px;
+      width: 100px;
+      height: 100px;
       background-color: #ff1493;
       border-radius: 50%;
       position: absolute;
     }
     .heart::before {
-      top: -32px;
+      top: -50px;
       left: 0;
     }
     .heart::after {
-      left: 32px;
+      left: 50px;
       top: 0;
     }
     
@@ -118,13 +118,13 @@
   </style>
 </head>
 <body>
-  <div class="stars" id="stars"></div>
+  <div class="stars"></div>
   <div class="heart" id="heart"></div>
   <div class="dancer"></div>
   <h1>Para a Mulher da Minha Vida...</h1>
   <div id="poema"></div>
   
-  <audio controls autoplay loop id="audio" style="background: rgba(255, 255, 255, 0.2); border-radius: 10px;">
+  <audio controls autoplay loop id="audio">
     <source src="deixafluir.mp3" type="audio/mpeg" />
     Seu navegador não suporta áudio.
   </audio>
@@ -138,6 +138,20 @@
   <div class="ring" id="ring"></div>
   
   <script>
+    function createStars() {
+      const starContainer = document.querySelector('.stars');
+      for (let i = 0; i < 100; i++) {
+        let star = document.createElement('div');
+        star.className = 'star';
+        star.style.top = `${Math.random() * 100}vh`;
+        star.style.left = `${Math.random() * 100}vw`;
+        star.style.animationDelay = `${Math.random() * 2}s`;
+        starContainer.appendChild(star);
+      }
+    }
+    
+    createStars();
+    
     const linhas = [
       "Nos teus olhos vejo um universo sem fim,",
       "Teu sorriso ilumina até a noite mais escura,",
@@ -159,19 +173,6 @@
     function showRing() {
       document.getElementById("ring").style.display = "block";
     }
-    
-    function createStars() {
-      const starsContainer = document.getElementById("stars");
-      for (let i = 0; i < 50; i++) {
-        let star = document.createElement("div");
-        star.classList.add("star");
-        star.style.top = Math.random() * 100 + "vh";
-        star.style.left = Math.random() * 100 + "vw";
-        star.style.animationDuration = Math.random() * 2 + 2 + "s";
-        starsContainer.appendChild(star);
-      }
-    }
-    createStars();
   </script>
 </body>
 </html>
