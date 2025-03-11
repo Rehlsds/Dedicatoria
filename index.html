@@ -16,44 +16,49 @@
       justify-content: center;
       font-family: Arial, sans-serif;
       color: white;
+      overflow: hidden;
     }
     
     /* Animação do coração pulsante */
     .heart {
-      width: 72px;
-      height: 72px;
-      background-color: #ff1493;
+      width: 60px;
+      height: 60px;
+      background-color: #ff4f79;
       position: relative;
       transform: rotate(-45deg);
+      top: -50px;
+      transition: transform 0.1s ease-in-out;
     }
     .heart::before, .heart::after {
       content: "";
-      width: 72px;
-      height: 72px;
-      background-color: #ff1493;
+      width: 60px;
+      height: 60px;
+      background-color: #ff4f79;
       border-radius: 50%;
       position: absolute;
     }
     .heart::before {
-      top: -36px;
+      top: -30px;
       left: 0;
     }
     .heart::after {
-      left: 36px;
+      left: 30px;
       top: 0;
     }
     
     /* Animação da bailarina */
     .dancer {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 120px;
       background: url('bailarina.png') no-repeat center/contain;
-      animation: dance 2s infinite alternate ease-in-out;
+      position: absolute;
+      bottom: 10px;
+      animation: spinDance 3s infinite linear;
     }
     
-    @keyframes dance {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-10px); }
+    @keyframes spinDance {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
     
     /* Estilo do poema */
@@ -70,9 +75,36 @@
       20%, 80% { opacity: 1; }
     }
     
-    /* Espaçamento para o player de áudio */
-    audio {
+    /* Estrelas animadas */
+    .estrela {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: white;
+      border-radius: 50%;
+      animation: brilho 3s infinite alternate;
+    }
+    
+    @keyframes brilho {
+      0% { opacity: 0.3; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.5); }
+    }
+    
+    /* Estilo do botão interativo */
+    #surpresa {
       margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background: #ff4f79;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    #surpresa:hover {
+      background: #ff2350;
     }
   </style>
 </head>
@@ -95,6 +127,9 @@
     Seu navegador não suporta áudio.
   </audio>
   
+  <!-- Botão surpresa -->
+  <button id="surpresa">Clique para uma surpresa ✨</button>
+  
   <script>
     // Poema de amor
     const linhas = [
@@ -112,36 +147,36 @@
       indice = (indice + 1) % linhas.length;
     }
     
-    // Exibe imediatamente a primeira linha e atualiza a cada 6 segundos
     atualizarPoema();
     setInterval(atualizarPoema, 6000);
 
     // Sincroniza o coração com os graves da música
     const audio = document.getElementById("audio");
     const heart = document.getElementById("heart");
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const analyser = audioContext.createAnalyser();
-    const source = audioContext.createMediaElementSource(audio);
-    source.connect(analyser);
-    analyser.connect(audioContext.destination);
-    analyser.fftSize = 256;
-
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-
+    
     function animateHeart() {
-      analyser.getByteFrequencyData(dataArray);
-      let bass = dataArray.slice(0, 10).reduce((a, b) => a + b, 0) / 10;
-      let scale = 1 + (bass / 200);
-      heart.style.transform = `scale(${scale}) rotate(-45deg)`;
-      requestAnimationFrame(animateHeart);
+      heart.style.transform = "scale(1.1) rotate(-45deg)";
+      setTimeout(() => {
+        heart.style.transform = "scale(1) rotate(-45deg)";
+      }, 100);
     }
 
     audio.onplay = () => {
-      if (audioContext.state === "suspended") {
-        audioContext.resume();
-      }
-      animateHeart();
+      setInterval(animateHeart, 500);
+    };
+    
+    // Adicionar estrelas animadas
+    for (let i = 0; i < 15; i++) {
+      let star = document.createElement("div");
+      star.className = "estrela";
+      document.body.appendChild(star);
+      star.style.left = Math.random() * 100 + "vw";
+      star.style.top = Math.random() * 100 + "vh";
+    }
+
+    // Surpresa ao clicar no botão
+    document.getElementById("surpresa").onclick = function() {
+      alert("Você é o amor da minha vida! aceita se casa comigo? 💖");
     };
   </script>
 </body>
