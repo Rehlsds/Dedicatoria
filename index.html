@@ -29,7 +29,6 @@
       left: 0;
       background: url('https://www.transparenttextures.com/patterns/stardust.png');
       opacity: 0.6;
-      pointer-events: none;
     }
     
     .heart {
@@ -62,15 +61,76 @@
       50% { transform: scale(1.2) rotate(-45deg); }
     }
     
-    /* Aliança em CSS */
-    .ring {
-      display: none;
+    /* Bailarina em CSS */
+    .dancer {
       width: 50px;
-      height: 50px;
+      height: 80px;
+      position: relative;
+      margin-top: 20px;
+    }
+    .dancer::before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .dancer::after {
+      content: "";
+      width: 50px;
+      height: 60px;
+      background: white;
+      border-radius: 50% 50% 0 0;
+      position: absolute;
+      top: 20px;
+      left: 0;
+    }
+    
+    .proposal {
+      margin-top: 20px;
+    }
+    
+    .proposal button {
+      background-color: #ff1493;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      cursor: pointer;
+      margin: 5px;
+      border-radius: 10px;
+    }
+    
+    /* Anel em CSS */
+    .ring-container {
+      display: none;
+      position: relative;
+      margin-top: 20px;
+    }
+    
+    .ring {
+      width: 60px;
+      height: 60px;
       border: 5px solid gold;
       border-radius: 50%;
       box-shadow: 0 0 10px gold;
-      margin-top: 20px;
+      position: relative;
+    }
+    
+    .diamond {
+      width: 20px;
+      height: 20px;
+      background: white;
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      box-shadow: 0 0 10px white;
     }
     
     .message {
@@ -78,11 +138,6 @@
       margin-top: 10px;
       font-size: 1.2em;
       color: gold;
-    }
-    
-    /* Estilização do player de música */
-    audio {
-      margin-top: 15px;
     }
   </style>
 </head>
@@ -92,27 +147,24 @@
   <div class="dancer"></div>
   <h1>Para a Mulher da Minha Vida...</h1>
   
-  <p>Te amo além das palavras, além do tempo.</p>
-  
-  <audio controls id="song">
-    <source src="deixafluir.mp3" type="audio/mpeg">
-    Seu navegador não suporta o elemento de áudio.
-  </audio>
-  
   <div class="proposal">
     <p>Quer casar comigo?</p>
     <button onclick="showRing()">Sim</button>
     <button onclick="alert('Pense bem... 💖')">Não</button>
   </div>
   
-  <div class="ring" id="ring"></div>
+  <div class="ring-container" id="ring-container">
+    <div class="ring">
+      <div class="diamond"></div>
+    </div>
+  </div>
+  
   <div class="message" id="message">Você se tornou a mulher mais feliz do mundo! Eu amo você, agora que iremos compartilhar a vida juntos, nos tornamos um só. 💖</div>
   
   <script>
     function showRing() {
-      document.getElementById("ring").style.display = "block";
+      document.getElementById("ring-container").style.display = "block";
       document.getElementById("message").style.display = "block";
-      document.getElementById("song").play();
     }
   </script>
 </body>
