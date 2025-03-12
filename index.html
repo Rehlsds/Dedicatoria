@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Para o meu grande AMOR</title>
+  <title>Batidas do Coração</title>
   <style>
     body {
       margin: 0;
@@ -16,81 +16,76 @@
       font-family: Arial, sans-serif;
       color: white;
       text-align: center;
-      overflow: hidden;
       position: relative;
+      overflow: hidden;
     }
-    
+
     .stars {
       position: absolute;
       width: 100%;
       height: 100%;
       top: 0;
       left: 0;
-      overflow: hidden;
-    }
-    
-    .star {
-      position: absolute;
-      background-color: white;
-      width: 2px;
-      height: 2px;
-      opacity: 0.8;
-      animation: twinkle 2s infinite alternate;
-    }
-    
-    @keyframes twinkle {
-      0% { opacity: 0.3; }
-      100% { opacity: 1; }
+      background: url('https://www.transparenttextures.com/patterns/stardust.png');
+      opacity: 0.6;
     }
     
     .heart {
-      width: 100px;
-      height: 100px;
+      width: 64px;
+      height: 64px;
       background-color: #ff1493;
       position: relative;
       transform: rotate(-45deg);
-      transition: transform 0.2s ease-in-out;
+      animation: heartbeat 1.5s infinite;
     }
     .heart::before, .heart::after {
       content: "";
-      width: 100px;
-      height: 100px;
+      width: 64px;
+      height: 64px;
       background-color: #ff1493;
       border-radius: 50%;
       position: absolute;
     }
     .heart::before {
-      top: -50px;
+      top: -32px;
       left: 0;
     }
     .heart::after {
-      left: 50px;
+      left: 32px;
       top: 0;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1) rotate(-45deg); }
+      50% { transform: scale(1.2) rotate(-45deg); }
     }
     
     .dancer {
-      width: 120px;
-      height: 120px;
-      background: url('bailarina.gif') no-repeat center/contain;
-      animation: dance 3s infinite alternate ease-in-out;
+      width: 50px;
+      height: 80px;
+      position: relative;
       margin-top: 20px;
     }
-    
-    @keyframes dance {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-15px); }
+    .dancer::before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
     }
-    
-    #poema {
-      font-size: 1.5em;
-      max-width: 80%;
-      margin-top: 20px;
-      animation: fadeinout 6s infinite;
-    }
-    
-    @keyframes fadeinout {
-      0%, 100% { opacity: 0; }
-      20%, 80% { opacity: 1; }
+    .dancer::after {
+      content: "";
+      width: 50px;
+      height: 60px;
+      background: white;
+      border-radius: 50% 50% 0 0;
+      position: absolute;
+      top: 20px;
+      left: 0;
     }
     
     .proposal {
@@ -110,9 +105,25 @@
     
     .ring {
       display: none;
-      width: 80px;
-      height: 80px;
-      background: url('ring.png') no-repeat center/contain;
+      width: 50px;
+      height: 50px;
+      border: 5px solid gold;
+      border-radius: 50%;
+      box-shadow: 0 0 10px gold;
+      margin-top: 20px;
+    }
+    
+    .message {
+      display: none;
+      margin-top: 10px;
+      font-size: 1.2em;
+      color: gold;
+    }
+
+    #poema {
+      display: none;
+      font-size: 1.2em;
+      max-width: 80%;
       margin-top: 20px;
     }
   </style>
@@ -122,12 +133,18 @@
   <div class="heart" id="heart"></div>
   <div class="dancer"></div>
   <h1>Para a Mulher da Minha Vida...</h1>
-  <div id="poema"></div>
   
-  <audio controls autoplay loop id="audio">
-    <source src="deixafluir.mp3" type="audio/mpeg" />
+  <audio id="musica" controls>
+    <source src="deixafluir.mp3" type="audio/mpeg">
     Seu navegador não suporta áudio.
   </audio>
+  
+  <div id="poema">Te amo além das palavras,
+    <br>Além do tempo, além do espaço.
+    <br>Nosso amor é infinito,
+    <br>Como um eterno abraço.
+  
+  </div>
   
   <div class="proposal">
     <p>Quer casar comigo?</p>
@@ -136,42 +153,13 @@
   </div>
   
   <div class="ring" id="ring"></div>
+  <div class="message" id="message">Você se tornou a mulher mais feliz do mundo! Eu amo você, agora que iremos compartilhar a vida juntos, nos tornamos um só. 💖</div>
   
   <script>
-    function createStars() {
-      const starContainer = document.querySelector('.stars');
-      for (let i = 0; i < 100; i++) {
-        let star = document.createElement('div');
-        star.className = 'star';
-        star.style.top = `${Math.random() * 100}vh`;
-        star.style.left = `${Math.random() * 100}vw`;
-        star.style.animationDelay = `${Math.random() * 2}s`;
-        starContainer.appendChild(star);
-      }
-    }
-    
-    createStars();
-    
-    const linhas = [
-      "Nos teus olhos vejo um universo sem fim,",
-      "Teu sorriso ilumina até a noite mais escura,",
-      "Em teus braços encontro meu lar,",
-      "Te amo além das palavras, além do tempo."
-    ];
-    
-    let indice = 0;
-    const poemElement = document.getElementById("poema");
-    
-    function atualizarPoema() {
-      poemElement.textContent = linhas[indice];
-      indice = (indice + 1) % linhas.length;
-    }
-    
-    atualizarPoema();
-    setInterval(atualizarPoema, 6000);
-    
     function showRing() {
       document.getElementById("ring").style.display = "block";
+      document.getElementById("message").style.display = "block";
+      document.getElementById("poema").style.display = "block";
     }
   </script>
 </body>
