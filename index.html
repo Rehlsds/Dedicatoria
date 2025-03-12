@@ -61,35 +61,6 @@
       50% { transform: scale(1.2) rotate(-45deg); }
     }
     
-    /* Bailarina em CSS */
-    .dancer {
-      width: 50px;
-      height: 80px;
-      position: relative;
-      margin-top: 20px;
-    }
-    .dancer::before {
-      content: "";
-      width: 20px;
-      height: 20px;
-      background: white;
-      border-radius: 50%;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .dancer::after {
-      content: "";
-      width: 50px;
-      height: 60px;
-      background: white;
-      border-radius: 50% 50% 0 0;
-      position: absolute;
-      top: 20px;
-      left: 0;
-    }
-    
     .proposal {
       margin-top: 20px;
     }
@@ -139,13 +110,26 @@
       font-size: 1.2em;
       color: gold;
     }
+
+    .poem {
+      margin-top: 20px;
+      font-style: italic;
+      font-size: 1.2em;
+      color: #ffcc00;
+    }
   </style>
 </head>
 <body>
   <div class="stars"></div>
   <div class="heart" id="heart"></div>
-  <div class="dancer"></div>
   <h1>Para a Mulher da Minha Vida...</h1>
+  
+  <div class="poem">
+    "O amor é uma luz que nunca se apaga,<br/>
+    Um brilho eterno em nossos corações.<br/>
+    No compasso das batidas, encontramos<br/>
+    A melodia que nos une para sempre."
+  </div>
   
   <div class="proposal">
     <p>Quer casar comigo?</p>
@@ -159,7 +143,7 @@
     </div>
   </div>
   
-  <div class="message" id="message">Você se tornou a mulher mais feliz do mundo! Eu amo você, agora que iremos compartilhar a vida juntos, nos tornamos um só. 💖</div>
+  <div class="message" id="message">Antes de você ser o meu AMOR, Você era a minha ORAÇÃO, agora iremos compartilhar a vida juntos, nos tornamos um só. 💖</div>
   
   <script>
     function showRing() {
