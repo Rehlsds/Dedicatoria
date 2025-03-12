@@ -20,6 +20,7 @@
       overflow: hidden;
     }
 
+    /* Estrelas no fundo */
     .stars {
       position: absolute;
       width: 100%;
@@ -28,6 +29,7 @@
       left: 0;
       background: url('https://www.transparenttextures.com/patterns/stardust.png');
       opacity: 0.6;
+      pointer-events: none;
     }
     
     .heart {
@@ -60,49 +62,7 @@
       50% { transform: scale(1.2) rotate(-45deg); }
     }
     
-    .dancer {
-      width: 50px;
-      height: 80px;
-      position: relative;
-      margin-top: 20px;
-    }
-    .dancer::before {
-      content: "";
-      width: 20px;
-      height: 20px;
-      background: white;
-      border-radius: 50%;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .dancer::after {
-      content: "";
-      width: 50px;
-      height: 60px;
-      background: white;
-      border-radius: 50% 50% 0 0;
-      position: absolute;
-      top: 20px;
-      left: 0;
-    }
-    
-    .proposal {
-      margin-top: 20px;
-    }
-    
-    .proposal button {
-      background-color: #ff1493;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      cursor: pointer;
-      margin: 5px;
-      border-radius: 10px;
-    }
-    
+    /* Aliança em CSS */
     .ring {
       display: none;
       width: 50px;
@@ -119,12 +79,10 @@
       font-size: 1.2em;
       color: gold;
     }
-
-    #poema {
-      display: none;
-      font-size: 1.2em;
-      max-width: 80%;
-      margin-top: 20px;
+    
+    /* Estilização do player de música */
+    audio {
+      margin-top: 15px;
     }
   </style>
 </head>
@@ -134,17 +92,12 @@
   <div class="dancer"></div>
   <h1>Para a Mulher da Minha Vida...</h1>
   
-  <audio id="musica" controls>
+  <p>Te amo além das palavras, além do tempo.</p>
+  
+  <audio controls id="song">
     <source src="deixafluir.mp3" type="audio/mpeg">
-    Seu navegador não suporta áudio.
+    Seu navegador não suporta o elemento de áudio.
   </audio>
-  
-  <div id="poema">Te amo além das palavras,
-    <br>Além do tempo, além do espaço.
-    <br>Nosso amor é infinito,
-    <br>Como um eterno abraço.
-  
-  </div>
   
   <div class="proposal">
     <p>Quer casar comigo?</p>
@@ -159,7 +112,7 @@
     function showRing() {
       document.getElementById("ring").style.display = "block";
       document.getElementById("message").style.display = "block";
-      document.getElementById("poema").style.display = "block";
+      document.getElementById("song").play();
     }
   </script>
 </body>
