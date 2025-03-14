@@ -60,6 +60,17 @@
       50% { transform: scale(1.2) rotate(-45deg); }
     }
     
+    .poem {
+      margin-top: 20px;
+      font-style: italic;
+      font-size: 1.2em;
+      color: #ffcc00;
+      height: 3em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
     .proposal {
       margin-top: 20px;
     }
@@ -75,14 +86,11 @@
       border-radius: 10px;
     }
     
-    .text-container {
-      margin-top: 20px;
-      font-size: 1.2em;
-      color: white;
-    }
-    
-    .hidden {
+    .message {
       display: none;
+      margin-top: 10px;
+      font-size: 1.2em;
+      color: gold;
     }
   </style>
 </head>
@@ -92,33 +100,42 @@
   <h1>Para a Mulher da Minha Vida...</h1>
   
   <audio id="music" controls>
-    <source src="deixafluir.mp3" type="audio/mpeg">
-    Seu navegador não suporta áudio.
+    <source src="sua-musica.mp3" type="audio/mpeg">
   </audio>
-
-  <div class="text-container">
-    <p id="line1" class="hidden">Te amo além das palavras, além do tempo.</p>
-    <p id="line2" class="hidden">A cada batida do meu coração eu penso em você.</p>
-    <p id="line3" class="hidden">Eu vejo você.</p>
+  
+  <div class="poem" id="poem">
+    Te amo além das palavras, além do tempo.
   </div>
   
   <div class="proposal">
     <p>Quer casar comigo?</p>
-    <button onclick="showMessage()">Sim</button>
+    <button onclick="showRing()">Sim</button>
     <button onclick="alert('Pense bem... 💖')">Não</button>
   </div>
   
-  <div class="hidden" id="final-message">Antes de você ser meu AMOR, Você era a minha ORAÇÃO, agora que iremos compartilhar a vida juntos, nos tornamos um só. 💖</div>
+  <div class="message" id="message">Antes de você ser meu AMOR, Você era a minha ORAÇÃO, agora que iremos compartilhar a vida juntos, nos tornamos um só. 💖</div>
   
   <script>
-    document.getElementById("music").addEventListener("play", function() {
-      setTimeout(() => document.getElementById("line1").classList.remove("hidden"), 5000);
-      setTimeout(() => document.getElementById("line2").classList.remove("hidden"), 12000);
-      setTimeout(() => document.getElementById("line3").classList.remove("hidden"), 18000);
+    const poemLines = [
+      "Te amo além das palavras, além do tempo.",
+      "A cada batida do meu coração eu penso em você.",
+      "Eu vejo você."
+    ];
+    let currentLine = 0;
+    
+    document.getElementById("music").addEventListener("timeupdate", function() {
+      let time = this.currentTime;
+      if (time > 10 && currentLine === 0) {
+        document.getElementById("poem").innerHTML = poemLines[1];
+        currentLine++;
+      } else if (time > 20 && currentLine === 1) {
+        document.getElementById("poem").innerHTML = poemLines[2];
+        currentLine++;
+      }
     });
-
-    function showMessage() {
-      document.getElementById("final-message").classList.remove("hidden");
+    
+    function showRing() {
+      document.getElementById("message").style.display = "block";
     }
   </script>
 </body>
