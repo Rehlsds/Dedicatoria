@@ -180,27 +180,33 @@
       if (music.currentTime > 15 && lineIndex === 2) updatePoem();
     });
   </script>
-  <div id="countdown-container">
+  
+<div id="countdown-container">
   <div id="countdown">3</div>
+  <audio id="suspense-audio" src="suspense.mp3"></audio>
 </div>
 
 <script>
-  let count = 3; // Inicia a contagem em 3 segundos
+  let count = 10; // Inicia a contagem em 10 segundos
   const countdownElement = document.getElementById("countdown");
   const countdownContainer = document.getElementById("countdown-container");
+  const suspenseAudio = document.getElementById("suspense-audio");
 
   function startCountdown() {
+    suspenseAudio.play(); // Começa a tocar a música de suspense
+
     const interval = setInterval(() => {
       count--;
       countdownElement.innerText = count;
       if (count <= 0) {
         clearInterval(interval);
         countdownContainer.style.display = "none"; // Remove a tela preta
+        suspenseAudio.pause(); // Para a música ao acabar a contagem
       }
     }, 1000);
   }
 
-  // Inicia a contagem assim que a página carregar
+  // Inicia a contagem e a música assim que a página carregar
   window.onload = startCountdown;
 </script>
 
