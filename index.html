@@ -180,5 +180,43 @@
       if (music.currentTime > 15 && lineIndex === 2) updatePoem();
     });
   </script>
+  <div id="countdown-container">
+  <div id="countdown">3</div>
+</div>
+
+<script>
+  let count = 3; // Inicia a contagem em 3 segundos
+  const countdownElement = document.getElementById("countdown");
+  const countdownContainer = document.getElementById("countdown-container");
+
+  function startCountdown() {
+    const interval = setInterval(() => {
+      count--;
+      countdownElement.innerText = count;
+      if (count <= 0) {
+        clearInterval(interval);
+        countdownContainer.style.display = "none"; // Remove a tela preta
+      }
+    }, 1000);
+  }
+
+  // Inicia a contagem assim que a página carregar
+  window.onload = startCountdown;
+</script>
+
+<style>
+  #countdown-container {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: black;
+    color: white;
+    font-size: 5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; /* Garante que fique por cima */
+  }
+</style>
 </body>
 </html>
