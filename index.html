@@ -28,6 +28,7 @@
       left: 0;
       background: url('https://www.transparenttextures.com/patterns/stardust.png');
       opacity: 0.6;
+      z-index: -1;
     }
     
     .heart {
@@ -60,19 +61,10 @@
       50% { transform: scale(1.2) rotate(-45deg); }
     }
     
-    .poem {
-      margin-top: 20px;
-      font-style: italic;
-      font-size: 1.2em;
-      color: #ffcc00;
-      height: 3em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
     .proposal {
       margin-top: 20px;
+      position: relative;
+      z-index: 10;
     }
     
     .proposal button {
@@ -84,6 +76,36 @@
       cursor: pointer;
       margin: 5px;
       border-radius: 10px;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .ring-container {
+      display: none;
+      position: relative;
+      margin-top: 20px;
+      z-index: 10;
+    }
+    
+    .ring {
+      width: 60px;
+      height: 60px;
+      border: 5px solid gold;
+      border-radius: 50%;
+      box-shadow: 0 0 10px gold;
+      position: relative;
+    }
+    
+    .diamond {
+      width: 20px;
+      height: 20px;
+      background: white;
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      box-shadow: 0 0 10px white;
     }
     
     .message {
@@ -91,6 +113,16 @@
       margin-top: 10px;
       font-size: 1.2em;
       color: gold;
+      position: relative;
+      z-index: 10;
+    }
+
+    .poem {
+      margin-top: 20px;
+      font-style: italic;
+      font-size: 1.2em;
+      color: #ffcc00;
+      min-height: 80px;
     }
   </style>
 </head>
@@ -99,13 +131,11 @@
   <div class="heart" id="heart"></div>
   <h1>Para a Mulher da Minha Vida...</h1>
   
-  <audio id="music" controls>
-    <source src="sua-musica.mp3" type="audio/mpeg">
-  </audio>
+  <div class="poem" id="poem"></div>
   
-  <div class="poem" id="poem">
-    Te amo além das palavras, além do tempo.
-  </div>
+  <audio id="music" controls>
+    <source src="seu_audio.mp3" type="audio/mp3">
+  </audio>
   
   <div class="proposal">
     <p>Quer casar comigo?</p>
@@ -113,30 +143,42 @@
     <button onclick="alert('Pense bem... 💖')">Não</button>
   </div>
   
+  <div class="ring-container" id="ring-container">
+    <div class="ring">
+      <div class="diamond"></div>
+    </div>
+  </div>
+  
   <div class="message" id="message">Antes de você ser meu AMOR, Você era a minha ORAÇÃO, agora que iremos compartilhar a vida juntos, nos tornamos um só. 💖</div>
   
   <script>
+    function showRing() {
+      document.getElementById("ring-container").style.display = "block";
+      document.getElementById("message").style.display = "block";
+    }
+
     const poemLines = [
       "Te amo além das palavras, além do tempo.",
       "A cada batida do meu coração eu penso em você.",
       "Eu vejo você."
     ];
-    let currentLine = 0;
     
-    document.getElementById("music").addEventListener("timeupdate", function() {
-      let time = this.currentTime;
-      if (time > 10 && currentLine === 0) {
-        document.getElementById("poem").innerHTML = poemLines[1];
-        currentLine++;
-      } else if (time > 20 && currentLine === 1) {
-        document.getElementById("poem").innerHTML = poemLines[2];
-        currentLine++;
+    let lineIndex = 0;
+    const poemElement = document.getElementById("poem");
+    const music = document.getElementById("music");
+    
+    function updatePoem() {
+      if (lineIndex < poemLines.length) {
+        poemElement.textContent = poemLines[lineIndex];
+        lineIndex++;
       }
-    });
-    
-    function showRing() {
-      document.getElementById("message").style.display = "block";
     }
+    
+    music.addEventListener("timeupdate", function() {
+      if (music.currentTime > 5 && lineIndex === 0) updatePoem();
+      if (music.currentTime > 10 && lineIndex === 1) updatePoem();
+      if (music.currentTime > 15 && lineIndex === 2) updatePoem();
+    });
   </script>
 </body>
 </html>
