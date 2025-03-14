@@ -20,7 +20,6 @@
       overflow: hidden;
     }
 
-    /* Estrelas no fundo */
     .stars {
       position: absolute;
       width: 100%;
@@ -29,7 +28,6 @@
       left: 0;
       background: url('https://www.transparenttextures.com/patterns/stardust.png');
       opacity: 0.6;
-      pointer-events: none;
     }
     
     .heart {
@@ -62,40 +60,65 @@
       50% { transform: scale(1.2) rotate(-45deg); }
     }
     
-    /* Estilização do player de música */
-    audio {
-      margin-top: 15px;
+    .proposal {
+      margin-top: 20px;
+    }
+    
+    .proposal button {
+      background-color: #ff1493;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      cursor: pointer;
+      margin: 5px;
+      border-radius: 10px;
+    }
+    
+    .text-container {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: white;
+    }
+    
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
   <div class="stars"></div>
   <div class="heart" id="heart"></div>
-  <div class="dancer"></div>
   <h1>Para a Mulher da Minha Vida...</h1>
   
-  <p>Te amo além das palavras, além do tempo.</p>
-  <p>A cada batida do meu coração eu penso em você.</p>
-  <p>Eu vejo você.</p>
-  
-  <audio controls id="song">
+  <audio id="music" controls>
     <source src="deixafluir.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
   </audio>
+
+  <div class="text-container">
+    <p id="line1" class="hidden">Te amo além das palavras, além do tempo.</p>
+    <p id="line2" class="hidden">A cada batida do meu coração eu penso em você.</p>
+    <p id="line3" class="hidden">Eu vejo você.</p>
+  </div>
   
   <div class="proposal">
     <p>Quer casar comigo?</p>
-    <button onclick="showRing()">Sim</button>
+    <button onclick="showMessage()">Sim</button>
     <button onclick="alert('Pense bem... 💖')">Não</button>
   </div>
   
-  <div class="ring" id="ring"></div>
-  <div class="message" id="message">Antes de você ser meu AMOR, Você era a minha ORAÇÃO, agora que iremos compartilhar a vida juntos, nos tornamos um só. 💖</div>
+  <div class="hidden" id="final-message">Antes de você ser meu AMOR, Você era a minha ORAÇÃO, agora que iremos compartilhar a vida juntos, nos tornamos um só. 💖</div>
   
   <script>
-    function showRing() {
-      document.getElementById("ring").style.display = "block";
-      document.getElementById("message").style.display = "block";
-      document.getElementById("song").play();
+    document.getElementById("music").addEventListener("play", function() {
+      setTimeout(() => document.getElementById("line1").classList.remove("hidden"), 5000);
+      setTimeout(() => document.getElementById("line2").classList.remove("hidden"), 12000);
+      setTimeout(() => document.getElementById("line3").classList.remove("hidden"), 18000);
+    });
+
+    function showMessage() {
+      document.getElementById("final-message").classList.remove("hidden");
     }
   </script>
 </body>
